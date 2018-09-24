@@ -18,7 +18,12 @@
     "test": "ember try:each"
   },
   "dependencies": {
-    "ember-cli-babel": "^6.6.0"
+    "@glimmer/syntax": "^0.36.4",
+    "@glimmer/wire-format": "^0.36.4",
+    "ember-cli-babel": "^6.6.0",
+    "jscodeshift": "^0.5.1",
+    "mkdirp": "^0.5.1",
+    "strip-bom": "^3.0.0"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",

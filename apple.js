@@ -1,10 +1,14 @@
-let index = require('./lib/');
+let index = require('./lib/transform-to-files');
 let projectRoot = __dirname + '/tests/dummy';
 let filePath = `../../dist/assets/dummy.js`;
 let projectNameSpace = 'dummy';
 
-index({
+let transformFiles = new index({
   projectRoot,
-  filePath,
+  inputFilePath: filePath,
   projectNameSpace
-})
+});
+
+transformFiles.run();
+
+console.log(transformFiles.getExternalModules());

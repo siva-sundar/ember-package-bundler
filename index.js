@@ -1,7 +1,6 @@
 /* eslint-env node */
 'use strict';
-const path = require('path');
-const transformToFiles = require('./lib/index');
+const transformToFiles = require('./lib/transform-to-files');
 module.exports = {
   name: 'ember-webpack-build',
 
@@ -24,7 +23,7 @@ module.exports = {
   outputReady() {
     console.log(new Date());
     let projectRoot = __dirname + '/tests/dummy';
-    let filePath = `../../dist/assets/dummy.js`;
+    let inputFilePath = `../../dist/assets/dummy.js`;
     let projectNameSpace = 'dummy';
 
     if (!this.isDevelopingAddon()) {
@@ -32,14 +31,15 @@ module.exports = {
       let app = this._findHost() || this;
       let name = app.project.name.constructor === Function ? app.project.name() : app.project.name;
       projectRoot = app.project.root,
-      filePath = `/dist/assets/${name}.js`,
+      inputFilePath = `/dist/assets/${name}.js`,
       projectNameSpace = name;
     }
-    transformToFiles({
+    let transformFiles = new transformToFiles({
       projectRoot,
-      filePath,
+      inputFilePath,
       projectNameSpace
     });
+    transformFiles.run();
     console.log(new Date());
   }
 };
